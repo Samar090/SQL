@@ -4,9 +4,27 @@ Select Location, date, total_cases, new_cases, total_deaths, population
 From newschema.cd
 Where continent is not null
 
-
 --Amount of new cases 
 Select Location, date, total_cases, new_cases, total_deaths, (new_cases/total_cases)*100 as Percentageofnewcases
 From newschema.cd
 Where continent is not null
 
+--Date Rate 
+Select Location, date, total_cases, new_cases, total_deaths, (total_deaths/total_cases)*100 as Percentageofnewcases
+From newschema.cd
+Where continent is not null
+
+--Highest amount of new_cases
+select location, MAX(new_cases) from newschema.cd group by location
+
+-- Highest Death count
+Select Location, MAX(Total_deaths) as TotalDeathCount
+From newschema.cd
+Where continent is not null 
+Group by Location
+
+--Global Numbers
+Select SUM(new_cases) as total_cases, SUM(new_deaths) as total_deaths, SUM(new_deaths )/SUM(New_Cases)*100 as DeathPercentage
+From newschema.cd
+where continent is not null 
+order by 1,2
